@@ -1,0 +1,90 @@
+<button class="delete-all-btn" *ngIf="selection.selected.length>1" mat-raised-button (click)="deleteAll()">
+    <i class="material-icons">
+        delete
+    </i>
+    delete all
+</button>
+<table  mat-table *ngIf="dataSource && dataSource.data" [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="project">
+        <th mat-header-cell *matHeaderCellDef> Project </th>
+        <td mat-cell *matCellDef="let element"> {{element.projectDetails.projectName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+        <th mat-header-cell *matHeaderCellDef> country </th>
+        <td mat-cell *matCellDef="let element"> {{getcountryTitle(element.deliveryDetails.country)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactPhone">
+        <th mat-header-cell *matHeaderCellDef> Phone </th>
+        <td mat-cell *matCellDef="let element"> {{element.projectDetails.contactPhone}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="assigned">
+        <th mat-header-cell *matHeaderCellDef> Assigned </th>
+        <td mat-cell *matCellDef="let element">
+            <div class="assigned-col-content"  *ngIf="element.assigned">
+                <div class="pic" [style.backgroundImage]="'url('+ element.assignedPic +')'">
+                    <span *ngIf="!element.assignedPic">{{splitName(element.assigned)}}</span>
+                </div>
+                <span> {{element.assigned}}</span>
+            </div>
+            <span *ngIf="!element.assigned">---</span>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">
+            <span [class]="element.status+'-status'" *ngIf="element.status">
+                {{element.status}}
+            </span>
+            <span class="pending-status" *ngIf="!element.status">
+               pending
+            </span>
+        </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+            <span class="actions-col">
+                ...
+                <div class="actions-icon">
+                    <div class="delete-action" (click)="deleteItem(element)">
+                        <i class="material-icons">
+                            delete
+                        </i>
+                    </div>
+                    <div class="edit-action"  [routerLink]="['project/'+element.id]">
+                        <i class="material-icons">
+                            edit
+                        </i>
+                    </div>
+
+
+                </div>
+            </span>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+    </tr>
+</table>
+<button class="add-project" mat-fab color="primary" [routerLink]="['project/0']">add +</button>

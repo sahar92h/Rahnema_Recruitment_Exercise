@@ -1,0 +1,243 @@
+<div class="back-button" [routerLink]="['/']">
+    <button mat-fab><i class="material-icons">
+            arrow_back
+        </i></button>
+</div>
+
+<mat-card>
+    <mat-horizontal-stepper labelPosition="bottom" #stepper linear>
+        <mat-step [stepControl]="projectDetailsFormGroup">
+            <form [formGroup]="projectDetailsFormGroup">
+                <ng-template matStepLabel>
+                    <div>
+                        <i class="material-icons">
+                            receipt
+                        </i>
+                    </div>
+                    <div class="step-label"> Project Details</div>
+                </ng-template>
+                <p class="step-title">Project Details:</p>
+                <div class="input-row">
+                    <label for="projectName">Project Name</label>
+                    <input matInput formControlName="projectName">
+                </div>
+                <div class="input-row">
+                    <label for="projectOwner">Project Owner</label>
+                    <input matInput placeholder=" " formControlName="projectOwner">
+                </div>
+                <div class="input-row">
+                    <label for="customerName">Customer Name</label>
+                    <div class="input-container">
+                        <input matInput formControlName="customerName">
+                        <mat-hint>If you want your invoices addressed to a company. Leave blank to use your full name.
+                        </mat-hint>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="cuontactPhone">Contact Phone</label>
+                    <div class="input-container">
+                        <span class="icon">
+                            <i class="material-icons">call</i>
+                        </span>
+                        <input matInput formControlName="contactPhone">
+                        <mat-hint>We'll never share your email with anyone else</mat-hint>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="emailAddress">Email Address</label>
+                    <div class="input-container">
+                        <span class="icon"> @ </span>
+                        <input matInput formControlName="emailAddress">
+                        <span class="domain-name-icon icon"> .com</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <label for="companySite">Company Site</label>
+                    <input matInput formControlName="companySite">
+                </div>
+
+            </form>
+            <div class="wizard-actions">
+                <button class="step-btn" mat-raised-button color="primary" [disabled]="projectDetailsFormGroup.invalid"
+                    matStepperNext>NEXT STEP</button>
+            </div>
+        </mat-step>
+
+        <mat-step [stepControl]="projectSettingsFormGroup">
+            <form [formGroup]="projectSettingsFormGroup">
+                <ng-template matStepLabel>
+                    <div>
+                        <i class="material-icons">
+                            settings_system_daydream
+                        </i>
+                    </div>
+                    <div class="step-label"> Project Settings</div>
+                </ng-template>
+                <p class="step-title">Project Settings:</p>
+
+                <div class="input-row">
+                    <label for="emailAddress">Email Address</label>
+                    <div class="input-container">
+                        <span class="icon"> @ </span>
+                        <input matInput formControlName="emailAddress">
+                        <mat-hint>email will not be publicly displayed <span>Learn more</span></mat-hint>
+
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <label for="projectName">language</label>
+                    <mat-select formControlName="language">
+                        <mat-option *ngFor="let language of languages | async" [value]="language.id">
+                            {{language.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input-row">
+                    <label for="projectOwner">Time Zone</label>
+                    <mat-select formControlName="timezone">
+                        <mat-option *ngFor="let timezone of timezones | async" [value]="timezone.id">
+                            {{timezone.title}}
+                        </mat-option>
+                    </mat-select>
+                </div>
+                <div class="input-row">
+                    <label for="customerName">Communication</label>
+                    <div class="input-container communication">
+                        <mat-checkbox class="example-margin" formControlName="email">Email</mat-checkbox>
+                        <mat-checkbox class="example-margin" formControlName="sms">SMS</mat-checkbox>
+                        <mat-checkbox class="example-margin" formControlName="phone">Phone</mat-checkbox>
+                    </div>
+                </div>
+
+            </form>
+            <div class="wizard-actions">
+
+                <button class="step-btn" mat-raised-button color="basic" matStepperPrevious>Previous
+                </button>
+                <button class="step-btn" mat-raised-button color="primary" [disabled]="projectSettingsFormGroup.invalid"
+                    matStepperNext>NEXT STEP
+                </button>
+            </div>
+
+
+        </mat-step>
+        <mat-step [stepControl]="deliveryDetailsFormGroup">
+            <form [formGroup]="deliveryDetailsFormGroup">
+                <ng-template matStepLabel>
+                    <div>
+                        <i class="material-icons">
+                            settings_system_daydream
+                        </i>
+                    </div>
+                    <div class="step-label"> Project Settings</div>
+                </ng-template>
+                <p class="step-title">Setup Your Address:</p>
+
+                <div class="input-col">
+                    <label for="emailAddress">Address Line 1</label>
+                    <div class="input-container">
+                        <input matInput formControlName="addressLine1">
+                    </div>
+                    <mat-hint>Please enter your address</mat-hint>
+                </div>
+                <div class="input-col">
+                    <label for="emailAddress">Address Line 2</label>
+                    <div class="input-container">
+                        <input matInput formControlName="addressLine2">
+                    </div>
+                    <mat-hint>Please enter your address</mat-hint>
+                </div>
+
+
+                <div class="input-row">
+                    <div class="input-col">
+                        <label for="emailAddress">Postcode</label>
+                        <div class="input-container">
+                            <input matInput formControlName="postcode">
+                        </div>
+                        <mat-hint>Please enter your Postcode</mat-hint>
+                    </div>
+                    <div class="input-col">
+                        <label for="emailAddress">City</label>
+                        <div class="input-container">
+                            <input matInput formControlName="city">
+                        </div>
+                        <mat-hint>Please enter your City</mat-hint>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-col">
+                        <label for="emailAddress">State</label>
+                        <div class="input-container">
+                            <input matInput formControlName="state">
+                        </div>
+                        <mat-hint>Please enter your State</mat-hint>
+                    </div>
+                    <div class="input-col">
+                        <label for="projectName">country:</label>
+                        <mat-select formControlName="country">
+                            <mat-option *ngFor="let country of counties | async" [value]="country.id">
+                                {{country.title}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Please select your country</mat-hint>
+                    </div>
+                </div>
+
+            </form>
+            <div class="wizard-actions">
+
+                <button class="step-btn" mat-raised-button color="basic" matStepperPrevious>Previous
+                </button>
+                <button class="step-btn" mat-raised-button color="primary" [disabled]="projectSettingsFormGroup.invalid"
+                    matStepperNext>NEXT STEP
+                </button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <form>
+                <ng-template matStepLabel>
+                    <div>
+                        <i class="material-icons">
+                            check_box
+                        </i>
+                    </div>
+                    <div class="step-label"> Review and Submit</div>
+                </ng-template>
+                <p class="step-title">Review your Details and Submit:</p>
+
+            </form>
+            <div class="review-detail-container">
+                <p>Project Details:</p>
+                <div>{{projectDetailsFormGroup.value.projectName}}</div>
+                <div>{{projectDetailsFormGroup.value.contactPhone}}</div>
+                <div>{{projectDetailsFormGroup.value.email}}</div>
+            </div>
+            <div class="review-detail-container">
+                <p>Delivery Settings:</p>
+                <div>{{projectSettingsFormGroup.value.emailAddress}}</div>
+                <div>{{projectSettingsFormGroup.value.phone}}</div>
+            </div>
+            <div class="review-detail-container">
+                <p>Delivery Address:</p>
+                <div>{{deliveryDetailsFormGroup.value.addressLine1}}</div>
+                <div>{{deliveryDetailsFormGroup.value.addressLine2}}</div>
+                <div>{{deliveryDetailsFormGroup.value.city}} - {{deliveryDetailsFormGroup.value.state}} -
+                    {{deliveryDetailsFormGroup.country}}</div>
+            </div>
+            <div class="wizard-actions">
+
+
+
+                <button class="step-btn" mat-raised-button color="basic" matStepperPrevious>Previous
+                </button>
+                <button class="step-btn" mat-raised-button color="primary" (click)="submitForms()"
+                    [disabled]="projectSettingsFormGroup.invalid" matStepperNext>SUBMIT
+                </button>
+            </div>
+
+
+        </mat-step>
+    </mat-horizontal-stepper>
+</mat-card>

@@ -1,0 +1,101 @@
+table {
+  * {
+    text-align: center;
+  }
+  width: 90%;
+  margin: 40px auto;
+  .assigned-col-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 40px;
+      background-color: #0abb87;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-size: 20px;
+    }
+    span {
+      width: 100px;
+    }
+  }
+  .actions-col {
+    font-size: 28px;
+    color: #727272;
+    line-height: 0;
+    position: relative;
+    cursor: pointer;
+
+    .actions-icon {
+      width: 60px;
+      height: 30px;
+      background-color: #fff;
+      box-shadow: 1px 1px 3px #aeaeae;
+      border-radius: 4px;
+      position: absolute;
+      right: calc(50% - 50px);
+      left: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: all 0.2s linear;
+
+      .delete-action,
+      .edit-action {
+        margin: 0 5px;
+      }
+      .delete-action i {
+        color: #dd447a;
+      }
+      .edit-action i {
+        color: #7d9eff;
+      }
+    }
+  }
+  .actions-col:hover .actions-icon {
+    opacity: 1;
+  }
+  span.pending-status,
+  span.processing-status,
+  span.success-status,
+  span.canceled-status {
+    background-color: #eef1ff;
+    color: #7d9eff;
+    padding: 5px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+  }
+  span.processing-status {
+    background-color: #ffebf1;
+    color: #fd4081;
+  }
+  span.canceled-status {
+    background-color: #fff8e8;
+    color: #ffcb4e;
+  }
+  span.success-status {
+    background-color: #e6f8f3;
+    color: #37c29c;
+  }
+}
+.add-project {
+  margin:0 20px;
+}
+.delete-all-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 5%;
+}
